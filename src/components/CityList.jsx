@@ -1,7 +1,22 @@
 import React from "react";
 import styles from "./CityList.module.css";
+import Spinner from "./Spinner";
+import CityItem from "./CityItem";
+import Message from "./Message";
+export default function CityList({ cities, isLoading }) {
+  if (isLoading) return <Spinner />;
 
-export default function CityList({ city }) {
-  const { name, emoji, date } = city;
-  return <div></div>;
+  if (!cities.length)
+    return (
+      <Message
+        message={"add your first cities by clicking on a city on the map"}
+      />
+    );
+  return (
+    <ul className={styles.cityList}>
+      {cities.map((el) => (
+        <CityItem city={el} />
+      ))}
+    </ul>
+  );
 }
